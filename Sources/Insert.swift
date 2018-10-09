@@ -25,7 +25,7 @@ extension MySQLStORM {
 		do {
 			return try insert(cols: keys, params: vals)
 		} catch {
-			LogFile.error("Error msg: \(error)", logFile: "./StORMlog.txt")
+			LogFile.error("Error msg: \(error)", logFile: StORMDebug.location)
 			throw StORMError.error("\(error)")
 		}
 	}
@@ -43,7 +43,7 @@ extension MySQLStORM {
 		do {
 			return try insert(cols: keys, params: vals)
 		} catch {
-			LogFile.error("Error msg: \(error)", logFile: "./StORMlog.txt")
+			LogFile.error("Error msg: \(error)", logFile: StORMDebug.location)
 			throw StORMError.error("\(error)")
 		}
 	}
@@ -56,7 +56,7 @@ extension MySQLStORM {
 		do {
 			return try insert(cols: cols, params: params, idcolumn: idname)
 		} catch {
-			LogFile.error("Error msg: \(error)", logFile: "./StORMlog.txt")
+			LogFile.error("Error msg: \(error)", logFile: StORMDebug.location)
 			throw StORMError.error("\(error)")
 		}
 	}
@@ -72,13 +72,13 @@ extension MySQLStORM {
 		}
 		let str = "INSERT INTO \(self.table()) (\(cols.joined(separator: ","))) VALUES(\(substString.joined(separator: ",")))"
 
-		if StORMdebug { LogFile.info("insert statement: \(str), params: \(paramString)", logFile: "./StORMlog.txt") }
+		if StORMDebug.active { LogFile.info("insert statement: \(str), params: \(paramString)", logFile: StORMDebug.location) }
 
 		do {
 			_ = try exec(str, params: paramString, isInsert: true)
 			return results.insertedID
 		} catch {
-			LogFile.error("Error msg: \(error)", logFile: "./StORMlog.txt")
+			LogFile.error("Error msg: \(error)", logFile: StORMDebug.location)
 			self.error = StORMError.error("\(error)")
 			throw error
 		}

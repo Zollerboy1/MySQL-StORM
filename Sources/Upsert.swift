@@ -43,7 +43,7 @@ extension MySQLStORM {
 		do {
 			try exec(str, params: paramsString)
 		} catch {
-			LogFile.error("Error msg: \(error)", logFile: "./StORMlog.txt")
+			LogFile.error("Error msg: \(error)", logFile: StORMDebug.location)
 			self.error = StORMError.error("\(error)")
 			throw error
 		}

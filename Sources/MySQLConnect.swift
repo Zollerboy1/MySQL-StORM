@@ -54,7 +54,7 @@ open class MySQLConnect: StORMConnect {
 
 			guard status else {
 				// verify connection success
-				LogFile.error("MySQL network connection error: \(server.errorMessage())", logFile: "./StORMlog.txt")
+				LogFile.error("MySQL network connection error: \(server.errorMessage())", logFile: StORMDebug.location)
 				resultCode = .error(server.errorMessage())
 				return
 			}
@@ -69,7 +69,7 @@ open class MySQLConnect: StORMConnect {
 
 			guard status else {
 				// verify connection success
-				LogFile.error("MySQL socket connection error: \(server.errorMessage())", logFile: "./StORMlog.txt")
+				LogFile.error("MySQL socket connection error: \(server.errorMessage())", logFile: StORMDebug.location)
 				resultCode = .error(server.errorMessage())
 				return
 			}
